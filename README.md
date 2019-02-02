@@ -47,10 +47,11 @@ PyCharm의 File - Setting - Project Interpreter - .. 를 선택해 원격 인터
 
 
 쿠버네티스 마스터 노드에서 아래의 명령어를 입력해 MySQL 컨테이너의 IP를 얻습니다.
+
     # root@icns-47:~# kubectl describe po $(kubectl get po | grep mysql | awk '{print $1}') | grep IP | awk '{print $2}'
       10.233.75.4
 
-출력된 IP를 `config.json`의 `host` 부분에 바꿔 넣습니다. 아래는 변경된 예시를 나타냅니다. (또는 IP 대신 mysql 을 입력해도 됩니다. 쿠버네티스 자체 DNS 덕분에 Deployment의 이름을 자동으로 인식해 Discovery가 가능하기 때문입니다. 예전에 뭔가 이유가 있어서 Alias가 안먹혀서 IP를 직접 썼었었는데, 지금 해보니 mysql 써도 됩니다)
+출력된 IP를 `config.json`의 `host` 부분에 바꿔 넣습니다. 아래는 변경된 예시를 나타냅니다. (또는 IP 대신 mysql 을 입력해도 됩니다. 쿠버네티스 자체 DNS 덕분에 Deployment의 이름을 자동으로 인식해 Discovery가 가능하기 때문입니다. kube-DNS를 사용하고 있지 않다면 IP를 직접 입력하세요.)
 
 <pre><code>{
     "mysql":{
